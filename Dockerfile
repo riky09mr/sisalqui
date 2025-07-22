@@ -95,5 +95,4 @@ EOF
 USER root
 
 EXPOSE 8080
-
 CMD php artisan migrate --force && nginx; php-fpm;
