@@ -96,4 +96,4 @@ USER root
 
 EXPOSE 8080
 
-CMD nginx; php-fpm;
+CMD php artisan migrate --force && nginx; php-fpm;
