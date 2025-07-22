@@ -94,5 +94,8 @@ EOF
 
 USER root
 
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
 EXPOSE 8080
-CMD php artisan migrate --force && nginx; php-fpm;
+CMD ["/start.sh"]
