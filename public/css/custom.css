@@ -78,3 +78,75 @@
 .table-hover tbody tr:hover {
     background-color: #f8f9fa;
 }
+
+/* Estilos para vistas de clientes */
+.bg-clientes {
+    background: #f4f8fb;
+    min-height: 100vh;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.card-header.bg-primary, .card-header.bg-clientes {
+    background: var(--primary);
+    color: #fff;
+    border-top-left-radius: 15px !important;
+    border-top-right-radius: 15px !important;
+}
+
+.card-header.bg-clientes h3 {
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.btn-primary, .btn-primary:focus {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(52,144,220,0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+    background: #2176bd;
+    border-color: #2176bd;
+}
+
+.btn-secondary {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #fff;
+    font-weight: 600;
+}
+
+.btn-secondary:hover {
+    background: #c76a13;
+    border-color: #c76a13;
+}
+
+.table thead th {
+    background: #eaf3fa;
+    color: #2176bd;
+    font-weight: 700;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background: #f7fbff;
+}
+
+h3 {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* Mejorar feedback de formularios */
+.invalid-feedback {
+    color: var(--danger);
+    font-size: 0.95em;
+}
+
+/* Espaciado para formularios */
+.form-group {
+    margin-bottom: 1.2rem;
+}

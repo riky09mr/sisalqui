@@ -31,13 +31,13 @@
 
                         <!-- Dirección de Entrega -->
                         <div class="form-group row">
-                            <label for="direccion" class="col-md-4 col-form-label text-md-right">Dirección</label>
+                            <label for="direccion_entrega" class="col-md-4 col-form-label text-md-right">Dirección</label>
                             <div class="col-md-6">
-                                <textarea name="direccion"
-                                          id="direccion"
-                                          class="form-control @error('direccion') is-invalid @enderror"
-                                          required>{{ old('direccion') }}</textarea>
-                                @error('direccion')
+                                <textarea name="direccion_entrega"
+                                          id="direccion_entrega"
+                                          class="form-control @error('direccion_entrega') is-invalid @enderror"
+                                          required>{{ old('direccion_entrega') }}</textarea>
+                                @error('direccion_entrega')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -69,19 +69,6 @@
                                        value="{{ old('fecha_reserva') }}"
                                        required>
                                 @error('fecha_reserva')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!-- Agregar campo descripcion -->
-                        <div class="form-group row">
-                            <label for="descripcion" class="col-md-4 col-form-label text-md-right">Descripción</label>
-                            <div class="col-md-6">
-                                <textarea name="descripcion"
-                                          id="descripcion"
-                                          class="form-control @error('descripcion') is-invalid @enderror">{{ old('descripcion') }}</textarea>
-                                @error('descripcion')
                                     <span class="invalid-feedback">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -528,8 +515,8 @@ $(document).ready(function() {
         }
 
         // Validar dirección
-        if (!$('#direccion').val().trim()) {
-            mostrarError($('#direccion'), 'La dirección es requerida');
+        if (!$('#direccion_entrega').val().trim()) {
+            mostrarError($('#direccion_entrega'), 'La dirección es requerida');
             return false;
         }
 
@@ -563,7 +550,7 @@ $(document).ready(function() {
         limpiarError($(this));
     });
 
-    $('#direccion').on('input', function() {
+    $('#direccion_entrega').on('input', function() {
         limpiarError($(this));
     });
 

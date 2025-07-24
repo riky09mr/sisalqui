@@ -59,13 +59,31 @@ class ReservaController extends Controller
             $request->validate([
                 'cliente_id' => 'required|exists:clientes,id',
                 'fecha_reserva' => 'required|date',
-                'fecha_entrega' => 'required|date|after_or_equal:fecha_reserva',
-                'direccion' => 'required|string',
-                'descripcion' => 'nullable|string',
+                'fecha_entrega' => 'required|date|before_or_equal:fecha_reserva',
+                'direccion_entrega' => 'required|string',
                 'productos' => 'required|array',
                 'productos.*.id' => 'required|exists:productos,id',
                 'productos.*.cantidad' => 'required|integer|min:1',
                 'productos.*.precio' => 'required|numeric|min:0'
+            ], [
+                'cliente_id.required' => 'El cliente es obligatorio.',
+                'cliente_id.exists' => 'El cliente seleccionado no existe.',
+                'fecha_reserva.required' => 'La fecha del evento es obligatoria.',
+                'fecha_reserva.date' => 'La fecha del evento no es válida.',
+                'fecha_entrega.required' => 'La fecha de entrega es obligatoria.',
+                'fecha_entrega.date' => 'La fecha de entrega no es válida.',
+                'fecha_entrega.before_or_equal' => 'La fecha de entrega no puede ser posterior a la fecha del evento.',
+                'direccion_entrega.required' => 'La dirección de entrega es obligatoria.',
+                'productos.required' => 'Debe agregar al menos un producto.',
+                'productos.array' => 'El formato de productos no es válido.',
+                'productos.*.id.required' => 'El producto es obligatorio.',
+                'productos.*.id.exists' => 'El producto seleccionado no existe.',
+                'productos.*.cantidad.required' => 'La cantidad es obligatoria.',
+                'productos.*.cantidad.integer' => 'La cantidad debe ser un número entero.',
+                'productos.*.cantidad.min' => 'La cantidad debe ser al menos 1.',
+                'productos.*.precio.required' => 'El precio es obligatorio.',
+                'productos.*.precio.numeric' => 'El precio debe ser un número.',
+                'productos.*.precio.min' => 'El precio debe ser mayor o igual a 0.'
             ]);
 
             // Calcular precio total
@@ -76,10 +94,10 @@ class ReservaController extends Controller
                 'cliente_id' => $request->cliente_id,
                 'fecha_reserva' => $request->fecha_reserva,
                 'fecha_entrega' => $request->fecha_entrega,
-                'direccion' => $request->direccion,
-                'descripcion' => $request->descripcion ?? '',
+                'direccion_entrega' => $request->direccion_entrega,
                 'precio_total' => $precioTotal,
-                'estado' => 1  // Estado pendiente por defecto
+                'total' => $precioTotal, // <--- AGREGAR ESTA LÍNEA
+                'estado' => 1
             ]);
 
             foreach($request->productos as $producto) {
@@ -171,20 +189,19 @@ class ReservaController extends Controller
             // Validar los datos básicos
             $request->validate([
                 'cliente_id' => 'required',
-                'direccion' => 'required',
+                'direccion_entrega' => 'required',
                 'fecha_reserva' => 'required|date',
                 'fecha_entrega' => 'required|date',
-                'descripcion' => 'nullable'
             ]);
 
             // Actualizar la reserva
             $reserva->update([
                 'cliente_id' => $request->cliente_id,
-                'direccion' => $request->direccion,
+                'direccion_entrega' => $request->direccion_entrega,
                 'fecha_reserva' => $request->fecha_reserva,
                 'fecha_entrega' => $request->fecha_entrega,
-                'descripcion' => $request->descripcion ?? '',
-                'precio_total' => $this->calcularTotal($request->productos)
+                'precio_total' => $this->calcularTotal($request->productos),
+                'total' => $this->calcularTotal($request->productos) // <--- AGREGAR ESTA LÍNEA
             ]);
 
             // Desactivar detalles anteriores

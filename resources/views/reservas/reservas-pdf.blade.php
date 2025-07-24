@@ -86,7 +86,7 @@
         <h3>Información del Cliente</h3>
         <p><strong>Cliente:</strong> {{ $reserva->cliente->nombre }} {{ $reserva->cliente->apellido }}</p>
         <p><strong>Teléfono:</strong> {{ $reserva->cliente->telefono }}</p>
-        <p><strong>Dirección de entrega:</strong> {{ $reserva->direccion }}</p>
+        <p><strong>Dirección de entrega:</strong> {{ $reserva->direccion_entrega }}</p>
     </div>
 
     <div class="info-section">

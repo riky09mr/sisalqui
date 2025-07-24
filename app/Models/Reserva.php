@@ -14,9 +14,9 @@ class Reserva extends Model
         'cliente_id',
         'fecha_reserva',
         'fecha_entrega',
-        'direccion',
-        'descripcion',
+        'direccion_entrega',
         'precio_total',
+        'total',
         'estado'  // 1=pendiente, 2=confirmado, 3=cancelado, 4=entregado, 5=retirado
     ];
 

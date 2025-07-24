@@ -60,14 +60,27 @@ class ProductoController extends Controller
         try {
             $request->validate([
                 'nombre' => 'required|string|max:255',
-                'descripcion' => 'required|string',
+                'descripcion' => 'nullable|string',
                 'costo_compra' => 'required|numeric|min:0',
                 'precio_alquiler' => 'required|numeric|min:0',
                 'stock' => 'required|integer|min:0',
-                'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:3072', // 3MB
                 'categoria' => 'required|integer',
                 'stock_minimo' => 'required|integer|min:0',
                 'estado' => 'required|integer'
+            ], [
+                'nombre.required' => 'El nombre es obligatorio.',
+                'descripcion.string' => 'La descripción debe ser un texto.',
+                'costo_compra.required' => 'El costo de compra es obligatorio.',
+                'precio_alquiler.required' => 'El precio de alquiler es obligatorio.',
+                'stock.required' => 'El stock es obligatorio.',
+                'imagen.required' => 'La imagen es obligatoria.',
+                'imagen.image' => 'El archivo debe ser una imagen.',
+                'imagen.mimes' => 'La imagen debe ser de tipo: jpeg, png, jpg o gif.',
+                'imagen.max' => 'La imagen no debe ser mayor a 3 MB.',
+                'categoria.required' => 'La categoría es obligatoria.',
+                'stock_minimo.required' => 'El stock mínimo es obligatorio.',
+                'estado.required' => 'El estado es obligatorio.'
             ]);
 
             // Manejo de la imagen
@@ -130,14 +143,26 @@ class ProductoController extends Controller
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'descripcion' => 'required|string',
+            'descripcion' => 'nullable|string',
             'costo_compra' => 'required|numeric|min:0',
             'precio_alquiler' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
-            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:3072', // 3MB
             'categoria' => 'required|integer',
             'stock_minimo' => 'required|integer|min:0',
             'estado' => 'required|integer'
+        ], [
+            'nombre.required' => 'El nombre es obligatorio.',
+            'descripcion.string' => 'La descripción debe ser un texto.',
+            'costo_compra.required' => 'El costo de compra es obligatorio.',
+            'precio_alquiler.required' => 'El precio de alquiler es obligatorio.',
+            'stock.required' => 'El stock es obligatorio.',
+            'imagen.image' => 'El archivo debe ser una imagen.',
+            'imagen.mimes' => 'La imagen debe ser de tipo: jpeg, png, jpg o gif.',
+            'imagen.max' => 'La imagen no debe ser mayor a 3 MB.',
+            'categoria.required' => 'La categoría es obligatoria.',
+            'stock_minimo.required' => 'El stock mínimo es obligatorio.',
+            'estado.required' => 'El estado es obligatorio.'
         ]);
 
         // Manejo de la imagen

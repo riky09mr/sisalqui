@@ -9,21 +9,51 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        body {
+            background: #f4f8fb;
+            font-family: 'Roboto', Arial, Helvetica, sans-serif;
+        }
+        .navbar {
+            background: #4e73df !important;
+            box-shadow: 0 2px 8px rgba(52,114,223,0.08);
+        }
+        .navbar .navbar-brand, .navbar .nav-link, .navbar .navbar-text {
+            color: #fff !important;
+            font-weight: 500;
+        }
+        .navbar .nav-link.active, .navbar .nav-link:focus, .navbar .nav-link:hover {
+            color: #b3c6ff !important;
+            background: rgba(255,255,255,0.08);
+            border-radius: 5px;
+        }
+        .navbar .navbar-toggler {
+            border-color: #fff;
+        }
+        .navbar .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.7)' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        main.py-4 {
+            padding-top: 2rem !important;
+            padding-bottom: 2rem !important;
+        }
+    </style>
     @stack('styles')
 
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 </head>
 <body>
+    @auth
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <i class="fas fa-home"></i> Menú Principal
@@ -102,6 +132,10 @@
             @yield('content')
         </main>
     </div>
+    @endauth
+    @guest
+        @yield('content')
+    @endguest
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
